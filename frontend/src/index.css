@@ -1,0 +1,73 @@
+@import "tailwindcss";
+
+/*
+ * Compiler Lab theme tokens (Tailwind v4 CSS-first config).
+ * Palette, fonts, radius, and shadow live here so a reviewer can restyle the
+ * whole app by editing one file. Token names match PRD §11.
+ */
+@theme {
+  --color-brand-cream-50: #fdfbf6;
+  --color-brand-cream-100: #faf5e8;
+  --color-brand-cream-200: #f5edda;
+  --color-brand-beige-100: #f3e9d2;
+  --color-brand-beige-200: #e8dcc0;
+  --color-brand-peach-100: #fbe5d8;
+  --color-brand-peach-200: #f5c9b0;
+  --color-brand-peach-300: #efa88d;
+  --color-brand-gold-100: #f9e5a8;
+  --color-brand-gold-200: #f2d171;
+  --color-brand-gold-400: #deb566;
+  --color-brand-gold-500: #d4a24c;
+  --color-brand-gold-600: #b8853a;
+  --color-brand-brown-500: #8b7b6b;
+  --color-brand-brown-700: #6b4e32;
+  --color-brand-brown-900: #3b2e20;
+  --color-brand-border: #e5dbca;
+
+  --color-status-success-fg: #4e7a4e;
+  --color-status-success-bg: #e8f2e8;
+  --color-status-error-fg: #a33a2e;
+  --color-status-error-bg: #fae4e0;
+  --color-status-warning-fg: #a87400;
+  --color-status-warning-bg: #fcf2d6;
+  --color-status-info-fg: #4f6f8c;
+  --color-status-info-bg: #e4edf4;
+  --color-status-neutral-fg: #6b6259;
+  --color-status-neutral-bg: #f2eee7;
+
+  --font-display: "Fraunces", serif;
+  --font-body: "Montserrat", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 12px;
+
+  --shadow-warm: 0 2px 8px rgba(59, 46, 32, 0.06);
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-brand-cream-50 font-body text-brand-brown-900;
+  }
+
+  :focus-visible {
+    @apply outline-none ring-2 ring-brand-gold-400 ring-offset-2;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

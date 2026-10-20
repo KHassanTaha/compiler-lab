@@ -126,3 +126,70 @@ class RunAllResult(BaseModel):
     semantic: EngineResult
     icg: EngineResult
     run_id: int
+
+
+class SnippetRequest(BaseModel):
+    name: str = Field(min_length=1, max_length=64)
+    code: str = Field(max_length=10000)
+
+
+class SnippetSummary(BaseModel):
+    """List item with a truncated code preview (pin B10)."""
+
+    id: int
+    name: str
+    code_preview: str
+    created_at: str
+    updated_at: str
+
+
+class SnippetDetail(BaseModel):
+    id: int
+    name: str
+    code: str
+    created_at: str
+    updated_at: str
+
+
+class RunSummary(BaseModel):
+    """List item: preview only, no full code (pin B10)."""
+
+    id: int
+    user_id: int
+    username: str
+    action: str
+    engine: str | None
+    status: str | None
+    error_count: int | None
+    code_preview: str
+    created_at: str
+
+
+class RunDetail(BaseModel):
+    id: int
+    user_id: int
+    username: str
+    action: str
+    engine: str | None
+    status: str | None
+    error_count: int | None
+    code: str
+    result_json: dict | None
+    created_at: str
+
+
+class AdminUserSummary(BaseModel):
+    id: int
+    username: str
+    email: EmailStr
+    role: str
+    run_count: int
+    last_active: str | None
+    created_at: str
+
+
+class AdminStats(BaseModel):
+    total_users: int
+    total_runs: int
+    error_rate: float
+    runs_today: int

@@ -56,3 +56,4 @@ docs/
 # ---- Playwright artifacts ----
 test-results/
 playwright-report/
+.playwright-mcp/

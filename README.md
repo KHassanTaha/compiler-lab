@@ -68,7 +68,7 @@ compiler-lab/
 ### Prerequisites
 
 - **Python 3.11+** and `pip`
-- **Node.js 18+** and `npm`
+- **Node.js 20.19+ (or 22.12+)** and `npm` — required by Vite 8
 
 ### 1. Backend
 

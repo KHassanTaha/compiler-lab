@@ -9,7 +9,7 @@ from sqlalchemy import select
 from app.config import settings
 from app.database import Base, SessionLocal, engine
 from app.models import User
-from app.routers import auth
+from app.routers import auth, engines
 from app.security import hash_password
 
 SEED_ADMIN = {
@@ -63,6 +63,7 @@ def create_app() -> FastAPI:
         return {"status": "ok"}
 
     app.include_router(auth.router, prefix="/api")
+    app.include_router(engines.router, prefix="/api")
 
     return app
 

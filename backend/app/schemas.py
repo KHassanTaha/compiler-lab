@@ -90,3 +90,39 @@ class Page(BaseModel, Generic[T]):
     page: int
     page_size: int
     total_pages: int
+
+
+class CodeRequest(BaseModel):
+    """Body for every engine endpoint."""
+
+    code: str = Field(max_length=10000)
+
+
+class EngineError(BaseModel):
+    message: str
+    line: int
+    column: int
+    severity: str
+    phase: str
+
+
+class EngineResult(BaseModel):
+    """Uniform engine response (spec §8.2)."""
+
+    engine: str
+    status: str
+    duration_ms: float
+    error_count: int
+    data: dict
+    errors: list[EngineError]
+    run_id: int | None = None
+
+
+class RunAllResult(BaseModel):
+    """run-all response (pin B6): nested results omit run_id; one top-level run_id."""
+
+    lex: EngineResult
+    parse: EngineResult
+    semantic: EngineResult
+    icg: EngineResult
+    run_id: int

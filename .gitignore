@@ -50,10 +50,7 @@ Thumbs.db
 *.log
 logs/
 
-# ---- Local project documents — never committed ----
-PRD.md
-CONTEXT.md
-AGENTS.md
+# ---- Local notes, specs, and generated docs ----
 docs/
 
 # ---- Playwright artifacts ----

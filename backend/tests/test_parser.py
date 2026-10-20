@@ -145,6 +145,14 @@ class TestParser_Tree:
         assert var.value == "int"
 
 
+class TestParser_Serialisation:
+    def test_to_dict_shape(self):
+        data = parse("int x = 5;").to_dict()
+        assert set(data) == {"tree", "derivation", "errors"}
+        assert data["tree"]["type"] == "Program"
+        assert data["tree"]["children"][0]["type"] == "VarDecl"
+
+
 class TestParser_Errors:
     def test_missing_semicolon(self):
         result = parse("int x = 5")

@@ -157,6 +157,14 @@ class TestLexer_Errors:
         assert len(result.errors) == 3
 
 
+class TestLexer_Serialisation:
+    def test_to_dict_shape(self):
+        data = lex("int x = 5;").to_dict()
+        assert set(data) == {"tokens", "summary", "errors"}
+        assert data["summary"]["total"] == len(data["tokens"])
+        assert data["tokens"][0]["type"] == "TYPE"
+
+
 class TestLexer_Perf:
     def test_long_token_stream_is_fast(self):
         code = "int x = 1;\n" * 2000

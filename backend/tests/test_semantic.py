@@ -177,6 +177,13 @@ class TestSemantic_ControlFlow:
         assert result.status == "success", messages(result)
 
 
+class TestSemantic_Serialisation:
+    def test_to_dict_shape(self):
+        data = analyze("int n = 5; likho(n);").to_dict()
+        assert set(data) == {"symbol_table", "scopes", "errors"}
+        assert data["symbol_table"][0]["name"] == "n"
+
+
 class TestSemantic_Output:
     def test_symbol_table_records_scope_and_used_flag(self):
         result = analyze("int n = 5; likho(n);")

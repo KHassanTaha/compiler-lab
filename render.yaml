@@ -1,0 +1,24 @@
+# Render free-tier web service for Compiler Lab backend.
+# Docs: https://render.com/docs/render-yaml
+services:
+  - type: web
+    name: compiler-lab-api
+    runtime: python
+    freeInstanceType: free
+    plan: free
+    buildCommand: pip install -r backend/requirements.txt
+    startCommand: cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: DATABASE_URL
+        sync: false          # set in Render dashboard → Neon Postgres connection string
+      - key: JWT_SECRET
+        sync: false          # set in Render dashboard → long random string
+      - key: JWT_ALGORITHM
+        value: HS256
+      - key: JWT_EXPIRE_MINUTES
+        value: "1440"
+      - key: CORS_ORIGINS
+        sync: false          # set in Render dashboard → https://<your-vercel-app>.vercel.app
+      - key: ENV
+        value: production
+    healthCheckPath: /health

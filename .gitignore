@@ -1,0 +1,61 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+env/
+*.egg-info/
+dist/
+build/
+.eggs/
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# ---- Node ----
+node_modules/
+.vite/
+dist/
+*.tsbuildinfo
+coverage/
+*.local
+
+# ---- Environment / secrets ----
+.env
+.env.*
+!.env.example
+!*.env.example
+
+# ---- Databases ----
+*.db
+*.sqlite3
+*.sqlite
+
+# ---- OS / editor ----
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+*.swp
+*~
+
+# ---- Logs ----
+*.log
+logs/
+
+# ---- Local project documents — never committed ----
+PRD.md
+CONTEXT.md
+AGENTS.md
+docs/
+
+# ---- Playwright artifacts ----
+test-results/
+playwright-report/

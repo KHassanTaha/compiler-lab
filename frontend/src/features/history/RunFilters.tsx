@@ -11,13 +11,15 @@ import {
 interface RunFiltersProps {
   filters: Filters;
   onChange: (filters: Filters) => void;
+  /** Admin adds a user dropdown, rendered after the date fields. */
+  extra?: React.ReactNode;
 }
 
 const FIELD =
   "rounded-lg border border-brand-border bg-white px-3 py-2 text-sm text-brand-brown-900";
 
 /** Filter bar shared by History and Admin (PRD §15). */
-export function RunFilters({ filters, onChange }: RunFiltersProps) {
+export function RunFilters({ filters, onChange, extra }: RunFiltersProps) {
   const set = (key: keyof Filters, value: string) => onChange({ ...filters, [key]: value });
 
   return (
@@ -106,6 +108,8 @@ export function RunFilters({ filters, onChange }: RunFiltersProps) {
           onChange={(event) => set("to", event.target.value)}
         />
       </label>
+
+      {extra}
 
       {hasActiveFilters(filters) && (
         <Button variant="ghost" size="sm" onClick={() => onChange(EMPTY_FILTERS)}>

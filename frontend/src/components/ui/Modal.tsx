@@ -6,10 +6,17 @@ interface ModalProps {
   onClose: () => void;
   children: React.ReactNode;
   footer?: React.ReactNode;
+  size?: "md" | "lg" | "xl";
 }
 
+const SIZES = {
+  md: "max-w-md",
+  lg: "max-w-2xl",
+  xl: "max-w-4xl",
+} as const;
+
 /** Focus-trapped dialog. Escape closes; focus returns to the opener. */
-export function Modal({ open, title, onClose, children, footer }: ModalProps) {
+export function Modal({ open, title, onClose, children, footer, size = "md" }: ModalProps) {
   const dialogRef = useRef<HTMLDivElement>(null);
   const openerRef = useRef<Element | null>(null);
 
@@ -56,7 +63,7 @@ export function Modal({ open, title, onClose, children, footer }: ModalProps) {
         aria-modal="true"
         aria-label={title}
         tabIndex={-1}
-        className="w-full max-w-md rounded-xl border border-brand-border bg-white p-6 shadow-warm"
+        className={`w-full ${SIZES[size]} max-h-[90vh] overflow-y-auto rounded-xl border border-brand-border bg-white p-6 shadow-warm`}
         onClick={(event) => event.stopPropagation()}
       >
         <h2 className="mb-3 font-display text-xl text-brand-brown-900">{title}</h2>

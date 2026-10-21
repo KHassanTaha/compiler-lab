@@ -17,6 +17,8 @@ interface RunsTableProps {
   onSortChange: (field: string) => void;
   onRedo: (run: RunSummary) => void;
   testId: string;
+  /** Overrides row click (admin opens a detail modal; history navigates). */
+  onRowClick?: (run: RunSummary) => void;
 }
 
 interface Column {
@@ -52,10 +54,12 @@ export function RunsTable({
   onSortChange,
   onRedo,
   testId,
+  onRowClick,
 }: RunsTableProps) {
   const navigate = useNavigate();
   const [sortField, sortDir] = sort.split(":") as [string, SortDir];
   const columns = showUser ? [BASE_COLUMNS[0], USER_COLUMN, ...BASE_COLUMNS.slice(1)] : BASE_COLUMNS;
+  const openRow = onRowClick ?? ((run: RunSummary) => navigate(`/runs/${run.id}`));
 
   if (loading) {
     return (
@@ -101,7 +105,7 @@ export function RunsTable({
             runs.map((run) => (
               <tr
                 key={run.id}
-                onClick={() => navigate(`/runs/${run.id}`)}
+                onClick={() => openRow(run)}
                 className="cursor-pointer border-t border-brand-border hover:bg-brand-cream-50"
               >
                 <td className="whitespace-nowrap px-3 py-2 text-xs text-brand-brown-500">
@@ -131,11 +135,7 @@ export function RunsTable({
                 </td>
                 <td className="whitespace-nowrap px-3 py-2 text-right">
                   <div className="inline-flex gap-1" onClick={(event) => event.stopPropagation()}>
-                    <Button
-                      size="sm"
-                      variant="ghost"
-                      onClick={() => navigate(`/runs/${run.id}`)}
-                    >
+                    <Button size="sm" variant="ghost" onClick={() => openRow(run)}>
                       View
                     </Button>
                     <Button size="sm" variant="secondary" onClick={() => onRedo(run)}>

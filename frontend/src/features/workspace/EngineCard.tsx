@@ -11,6 +11,8 @@ interface EngineCardProps {
   status: EngineCardStatus;
   onRun: (engine: EngineKey) => void;
   defaultOpen?: boolean;
+  /** Hides the Run button (used by shared/detail views). */
+  readOnly?: boolean;
 }
 
 const STATUS_LABEL: Record<EngineCardStatus, string> = {
@@ -28,7 +30,14 @@ const STATUS_TONE = {
 } as const;
 
 /** One engine's result panel: formatted view, raw JSON, errors, timing. */
-export function EngineCard({ engine, result, status, onRun, defaultOpen = false }: EngineCardProps) {
+export function EngineCard({
+  engine,
+  result,
+  status,
+  onRun,
+  defaultOpen = false,
+  readOnly = false,
+}: EngineCardProps) {
   const config: EngineConfig = ENGINE_BY_KEY[engine];
   const [open, setOpen] = useState(defaultOpen);
   const [tab, setTab] = useState<"formatted" | "raw">("formatted");
@@ -63,14 +72,16 @@ export function EngineCard({ engine, result, status, onRun, defaultOpen = false 
           <span className="font-mono text-xs text-brand-brown-500">{result.duration_ms} ms</span>
         )}
         <Badge tone={STATUS_TONE[displayStatus]}>{STATUS_LABEL[displayStatus]}</Badge>
-        <button
-          type="button"
-          onClick={() => onRun(engine)}
-          disabled={status === "running"}
-          className="rounded-lg border border-brand-border bg-white px-2.5 py-1 text-xs text-brand-brown-700 hover:bg-brand-cream-100 disabled:opacity-60"
-        >
-          Run
-        </button>
+        {!readOnly && (
+          <button
+            type="button"
+            onClick={() => onRun(engine)}
+            disabled={status === "running"}
+            className="rounded-lg border border-brand-border bg-white px-2.5 py-1 text-xs text-brand-brown-700 hover:bg-brand-cream-100 disabled:opacity-60"
+          >
+            Run
+          </button>
+        )}
       </header>
 
       {open && (

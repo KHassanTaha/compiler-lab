@@ -53,7 +53,10 @@ export function LandingPage() {
             <p className="mb-3 text-sm font-medium uppercase tracking-wide text-brand-gold-600">
               Compiler construction, made visible
             </p>
-            <h1 className="font-display text-5xl leading-tight text-brand-brown-900 md:text-6xl">
+            <h1
+              data-testid="hero-heading"
+              className="font-display text-5xl leading-tight text-brand-brown-900 md:text-6xl"
+            >
               Watch a program pass through every stage of a compiler.
             </h1>
             <p className="mt-6 max-w-2xl text-lg text-brand-brown-500">

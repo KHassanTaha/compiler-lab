@@ -137,3 +137,74 @@ export interface GrammarEntry {
   production: string;
   example: string;
 }
+
+// ---- Per-engine `data` payload shapes (mirror the backend to_dict methods) ----
+
+export interface Token {
+  type: string;
+  value: string;
+  line: number;
+  column: number;
+}
+
+export interface TokenSummary {
+  total: number;
+  by_type: Record<string, number>;
+}
+
+export interface LexerData {
+  tokens: Token[];
+  summary: TokenSummary;
+  errors: EngineError[];
+}
+
+export interface AstNode {
+  type: string;
+  line: number;
+  column: number;
+  value?: unknown;
+  children?: AstNode[];
+}
+
+export interface DerivationStep {
+  step: number;
+  rule: string;
+  matched_text: string;
+}
+
+export interface ParserData {
+  tree: AstNode | null;
+  derivation: DerivationStep[];
+  errors: EngineError[];
+}
+
+export interface SymbolRow {
+  scope: string;
+  name: string;
+  type: string;
+  line: number;
+  used: boolean;
+}
+
+export interface Scope {
+  name: string;
+  depth: number;
+  symbols: SymbolRow[];
+}
+
+export interface SemanticData {
+  symbol_table: SymbolRow[];
+  scopes: Scope[];
+  errors: EngineError[];
+}
+
+export interface IcgData {
+  tac: string[];
+  temp_count: number;
+  label_count: number;
+  errors: EngineError[];
+  note?: string;
+}
+
+/** Local run state for one engine card (idle until first run). */
+export type EngineCardStatus = "idle" | "running" | "success" | "error";

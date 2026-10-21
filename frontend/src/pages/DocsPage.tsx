@@ -15,7 +15,7 @@ const AUTH_TONE: Record<string, string> = {
 
 export function DocsPage() {
   return (
-    <section data-testid="docs-page" className="mx-auto max-w-6xl px-4 py-12">
+    <section data-testid="docs-root" className="mx-auto max-w-6xl px-4 py-12">
       <h1 className="font-display text-4xl text-brand-brown-900">ZubaanScript Docs</h1>
       <p className="mt-3 max-w-2xl text-brand-brown-500">
         The grammar, the keyword map, and the API surface — everything you need to write and reason

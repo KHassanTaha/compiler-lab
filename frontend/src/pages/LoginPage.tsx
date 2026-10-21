@@ -62,7 +62,12 @@ export function LoginPage() {
           Welcome back. Compile where you left off.
         </p>
 
-        <form className="mt-6 flex flex-col gap-4" onSubmit={onSubmit} noValidate>
+        <form
+          className="mt-6 flex flex-col gap-4"
+          onSubmit={onSubmit}
+          noValidate
+          data-testid="login-form"
+        >
           <Input
             label="Username"
             name="username"

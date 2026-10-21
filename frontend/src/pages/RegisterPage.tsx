@@ -70,7 +70,12 @@ export function RegisterPage() {
           Save snippets, keep your history, and share runs.
         </p>
 
-        <form className="mt-6 flex flex-col gap-4" onSubmit={onSubmit} noValidate>
+        <form
+          className="mt-6 flex flex-col gap-4"
+          onSubmit={onSubmit}
+          noValidate
+          data-testid="register-form"
+        >
           <Input
             label="Username"
             name="username"

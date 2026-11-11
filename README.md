@@ -65,6 +65,8 @@ compiler-lab/
 
 ## Quick start (local development)
 
+> 👉 **On Windows?** Follow the beginner-friendly step-by-step guide in [WINDOWS_SETUP.md](WINDOWS_SETUP.md).
+
 ### Prerequisites
 
 - **Python 3.11+** and `pip`
